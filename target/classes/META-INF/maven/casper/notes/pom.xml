@@ -4,6 +4,14 @@
 
   <modelVersion>4.0.0</modelVersion>
 
+  <!-- Spring Boot Parent POM -->
+  <parent>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-parent</artifactId>
+      <version>2.7.5</version>
+      <relativePath/> <!-- Look for the parent in Maven Central -->
+  </parent>
+
   <groupId>casper</groupId>
   <artifactId>notes</artifactId>
   <version>1</version>
@@ -34,21 +42,18 @@
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-web</artifactId>
-        <version>2.7.5</version> <!-- Spring Boot version -->
     </dependency>
     
     <!-- Thymeleaf for rendering HTML templates -->
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        <version>2.7.5</version> <!-- Spring Boot version -->
     </dependency>
     
     <!-- Spring Boot DevTools for automatic restart during development -->
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-devtools</artifactId>
-        <version>2.7.5</version> <!-- Spring Boot version -->
         <scope>runtime</scope>
     </dependency>
 
@@ -56,7 +61,6 @@
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-test</artifactId>
-        <version>2.7.5</version> <!-- Spring Boot version -->
         <scope>test</scope>
     </dependency>
   </dependencies>
@@ -68,7 +72,6 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-        <version>2.7.5</version> <!-- Spring Boot version -->
       </plugin>
 
       <!-- Maven Clean Plugin -->
@@ -96,7 +99,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>casper.notes.NotesAppApplication</mainClass> <!-- Updated with your main class -->
+              <mainClass>casper.notes.Main</mainClass> <!-- Ensure this is the correct main class -->
             </manifest>
           </archive>
         </configuration>
@@ -119,7 +122,7 @@
               <arguments>
                 <argument>build</argument>
                 <argument>-t</argument>
-                <argument>casper.notes</argument>
+                <argument>casper.notes:v2</argument>
                 <argument>.</argument>
               </arguments>
             </configuration>
@@ -131,4 +134,3 @@
   </build>
   
 </project>
-
