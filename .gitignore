@@ -1,0 +1,23 @@
+# Maven
+target/                  # Maven build output
+.mvn/                    # Maven wrapper folder (if using Maven Wrapper)
+
+# IDE files
+.idea/                   # IntelliJ IDEA
+.vscode/                 # VSCode
+*.iml                    # IntelliJ IDEA project files
+
+# OS-specific files
+.DS_Store                # macOS file
+Thumbs.db                # Windows file
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# Dependency directories
+.gradle/
+.maven/
+
+# JUnit test output
+surefire-reports/
