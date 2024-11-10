@@ -54,8 +54,8 @@ jobs:
       run: |
         heroku container:login
         docker tag cazz99/casper.notes:v2 registry.heroku.com/casper-notes>/web
-        docker push registry.heroku.com/<casper-notes>/web
+        docker push registry.heroku.com/casper-notes/web
 
     - name: Release Docker Image on Heroku
       run: |
-        heroku container:release web --app <casper.notes>
+        heroku container:release web --app casper.notes
