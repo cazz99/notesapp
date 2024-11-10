@@ -1,0 +1,61 @@
+name: Version 2 Pipeline
+
+on:
+  push:
+    branches:
+      - version-2  # Trigger the pipeline on pushes to version-2 branch
+  pull_request:
+    branches:
+      - version-2  # Trigger on PRs targeting version-2 branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+
+    - name: Build with Maven
+      run: mvn clean install  # Build the project
+
+    - name: Run Tests
+      run: mvn test  # Run JUnit tests
+
+    - name: Package Application
+      run: mvn package  # Package the application
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}  # Set your Docker Hub username in GitHub Secrets
+        password: ${{ secrets.DOCKER_PASSWORD }}  # Set your Docker Hub password in GitHub Secrets
+
+    - name: Build and Push Docker Image to Docker Hub
+      run: |
+        docker build -t cazz99/casper.notes:v2 .
+        docker push cazz99/casper.notes:v2
+
+    - name: Log in to Heroku
+      uses: akshnz/heroku-login-action@v1
+      with:
+        heroku_email: ${{ secrets.HEROKU_EMAIL }}
+        heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+
+    - name: Push Docker Image to Heroku Container Registry
+      run: |
+        heroku container:login
+        docker tag cazz99/casper.notes:v2 registry.heroku.com/casper-notes>/web
+        docker push registry.heroku.com/<casper-notes>/web
+
+    - name: Release Docker Image on Heroku
+      run: |
+        heroku container:release web --app <casper.notes>
