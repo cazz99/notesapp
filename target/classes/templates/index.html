@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .note {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+        button {
+            padding: 10px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        #noteForm {
+            display: none;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Notes App</h1>
+        <button onclick="showForm()">Create Note</button>
+        
+        <form id="noteForm" onsubmit="saveNote(); return false;">
+            <h2>Create/Edit Note</h2>
+            <label for="title">Title:</label><br>
+            <input type="text" id="title" required><br><br>
+            
+            <label for="content">Content:</label><br>
+            <textarea id="content" required></textarea><br><br>
+            
+            <button type="submit">Save Note</button>
+            <button type="button" onclick="hideForm()">Cancel</button>
+        </form>
+        
+        <div id="notesContainer">
+            <!-- Notes will be displayed here dynamically -->
+        </div>
+    </div>
+
+    <script>
+        const notesContainer = document.getElementById("notesContainer");
+
+        function showForm() {
+            document.getElementById("noteForm").style.display = "block";
+            document.getElementById("title").value = '';
+            document.getElementById("content").value = '';
+        }
+
+        function hideForm() {
+            document.getElementById("noteForm").style.display = "none";
+        }
+
+        function saveNote() {
+            const title = document.getElementById("title").value;
+            const content = document.getElementById("content").value;
+            const note = { title, content };
+            
+            // Placeholder for backend integration - add/save note here
+            addNoteToContainer(note);
+            
+            hideForm();
+        }
+
+        function addNoteToContainer(note) {
+            const noteDiv = document.createElement("div");
+            noteDiv.className = "note";
+            noteDiv.innerHTML = `
+                <h3>${note.title}</h3>
+                <p>${note.content}</p>
+                <div class="buttons">
+					<label for="status">Status:</label>
+					<select id="status" name="status">
+					     <option value="IN_PROGRESS">In Progress</option>
+					     <option value="COMPLETED">Completed</option>
+					</select>
+                </div>
+            `;
+            notesContainer.appendChild(noteDiv);
+        }
+
+       
+    </script>
+</body>
+</html>

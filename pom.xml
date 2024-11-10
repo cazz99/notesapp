@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>casper</groupId>
   <artifactId>notes</artifactId>
-  <version>1-SNAPSHOT</version>
+  <version>1</version>
   <name>notes</name>
   <url>http://www.example.com</url>
 
@@ -15,6 +15,7 @@
     <maven.compiler.release>17</maven.compiler.release>
   </properties>
 
+  <!-- Dependency Management -->
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -27,48 +28,81 @@
     </dependencies>
   </dependencyManagement>
 
+  <!-- Dependencies -->
   <dependencies>
+    <!-- Spring Boot Web (REST API & Web support) -->
     <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <scope>test</scope>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+        <version>2.7.5</version> <!-- Spring Boot version -->
     </dependency>
+    
+    <!-- Thymeleaf for rendering HTML templates -->
     <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-params</artifactId>
-      <scope>test</scope>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        <version>2.7.5</version> <!-- Spring Boot version -->
+    </dependency>
+    
+    <!-- Spring Boot DevTools for automatic restart during development -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-devtools</artifactId>
+        <version>2.7.5</version> <!-- Spring Boot version -->
+        <scope>runtime</scope>
+    </dependency>
+
+    <!-- Spring Boot Starter Test for testing purposes -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <version>2.7.5</version> <!-- Spring Boot version -->
+        <scope>test</scope>
     </dependency>
   </dependencies>
 
+  <!-- Build section -->
   <build>
     <plugins>
+      <!-- Spring Boot Maven Plugin -->
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>2.7.5</version> <!-- Spring Boot version -->
+      </plugin>
+
+      <!-- Maven Clean Plugin -->
       <plugin>
         <artifactId>maven-clean-plugin</artifactId>
         <version>3.4.0</version>
       </plugin>
-      <plugin>
-        <artifactId>maven-resources-plugin</artifactId>
-        <version>3.3.1</version>
-      </plugin>
+
+      <!-- Maven Compiler Plugin -->
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.13.0</version>
       </plugin>
+
+      <!-- Maven Surefire Plugin for running tests -->
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.3.0</version>
       </plugin>
+
+      <!-- Maven Jar Plugin for creating the jar file -->
       <plugin>
         <artifactId>maven-jar-plugin</artifactId>
         <version>3.4.2</version>
         <configuration>
           <archive>
             <manifest>
-              <mainClass>casper.notes.App</mainClass>
+              <mainClass>casper.notes.NotesAppApplication</mainClass> <!-- Updated with your main class -->
             </manifest>
           </archive>
         </configuration>
       </plugin>
+
+      <!-- Maven Exec Plugin for Docker Build -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
@@ -92,23 +126,9 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <artifactId>maven-install-plugin</artifactId>
-        <version>3.1.2</version>
-      </plugin>
-      <plugin>
-        <artifactId>maven-deploy-plugin</artifactId>
-        <version>3.1.2</version>
-      </plugin>
-      <plugin>
-        <artifactId>maven-site-plugin</artifactId>
-        <version>3.12.1</version>
-      </plugin>
-      <plugin>
-        <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>3.6.1</version>
-      </plugin>
+
     </plugins>
   </build>
   
 </project>
+

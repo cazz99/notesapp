@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
 Build-Jdk-Spec: 22
-Main-Class: casper.notes.App
+Main-Class: casper.notes.NotesAppApplication
 Created-By: Maven Integration for Eclipse
 
